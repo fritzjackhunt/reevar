@@ -1,0 +1,7 @@
+{
+  "name": "Reevar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

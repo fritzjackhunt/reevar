@@ -1,0 +1,97 @@
+.input {
+    font-size: 300;
+}
+
+ion-item {
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.header {
+    margin-top: 100px;
+    margin-bottom: 80px;
+    text-align: center;
+    
+    .subTitle {
+        font-size: 1rem;
+    }
+
+    .title {
+        font-size: 2rem;
+        font-weight: 900;
+    }
+}
+
+.signupLink {
+    display: flex;
+    margin: auto;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 80%;
+    right: 0;
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+}
+
+.forgotPassword {
+    display: flex;
+    justify-content: flex-end;
+
+    a {
+        font-weight: 400;
+        font-size: 0.8rem;
+        text-decoration: none;
+    }
+}
+
+ion-item {
+    --background: #FBEDE1;
+    --color: black;
+  
+    --border-radius: 0;
+  
+    --ripple-color: deeppink;
+
+    --inner-border-width: 0 0 0 0;
+  
+}
+
+ion-input {
+    --color: black;
+}
+
+ion-icon {
+    color: inherit !important;
+}
+
+.fullheight {
+   height: 100%;
+}
+  
+.xc {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+  
+.vcs {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+  
+.hcs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
