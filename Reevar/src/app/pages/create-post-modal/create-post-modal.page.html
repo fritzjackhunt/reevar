@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Post</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="savePost()">
+    <ion-item>
+      <ion-label position="floating">Title</ion-label>
+      <ion-input [(ngModel)]="post.title" name="title" required></ion-input>
+    </ion-item>
+
+    <div id="editor-container"></div>
+
+    <ion-button expand="full" type="submit">Save Post</ion-button>
+  </form>
+</ion-content>

@@ -1,71 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppwriteService } from '../../services/appwrite.service';
 import { Router } from '@angular/router';
-
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  standalone: false
+  standalone: false,
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
+  loginForm: FormGroup;
 
-  // Initialize Firebase
-  oApp = initializeApp(environment.firebaseConfig);
-
-  // Initialize Firebase Authentication and get a reference to the service
-  oAuth = getAuth(this.oApp);
-
-  gEmail = ""
-  gPassword = ""
-  gDisplayName = ""
-
-
-  constructor(public router : Router, public loadingCtrl : LoadingController) { } 
-
-  ngOnInit() {
-    
+  constructor(
+    private fb: FormBuilder,
+    private appwrite: AppwriteService,
+    private router: Router
+  ) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
 
-  async login () {
-    const loading = await this.loadingCtrl.create();
-    await loading.present();
-    signInWithEmailAndPassword(this.oAuth, this.gEmail, this.gPassword)
-    .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    this.router.navigate(['/home'])
+  async login() {
+    const { email, password } = this.loginForm.value;
 
-   /*if (user !== null) {
-      user.providerData.forEach((profile) => {
-        console.log("Sign-in provider: " + profile.providerId);
-        console.log("  Provider-specific UID: " + profile.uid);
-        console.log("  Name: " + profile.displayName);
-        console.log("  Email: " + profile.email);
-        console.log("  Photo URL: " + profile.photoURL);
-      });
+    try {
+      // Log in user
+      const session = await this.appwrite.account.createEmailPasswordSession(email, password);
+      console.log('User logged in successfully:', session);
+
+      // Navigate to the profile page
+      this.router.navigate(['/profile']);
+    } catch (error) {
+      console.error('Error during login:', error);
     }
-    */
-   
-    loading.dismiss();
-    console.log(user)
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode);
-    console.log(errorMessage);
-  });
-
-
-
-
-
-}
-
+  }
 }

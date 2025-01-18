@@ -9,6 +9,8 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { QuillModule } from 'ngx-quill';
+
 import * as firebase from "firebase/app";
 
 firebase.initializeApp(environment.firebaseConfig);
@@ -19,6 +21,7 @@ firebase.initializeApp(environment.firebaseConfig);
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
+    QuillModule.forRoot(), //Import Quilr wrapper module
     
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

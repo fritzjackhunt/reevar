@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { AppwriteService } from '../services/appwrite.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,36 +9,30 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore';
   standalone: false,
 })
 export class HomePage implements OnInit {
-  userData: any = null; // Store user data here
+  posts: any[] = [];
 
-  constructor() {}
+  constructor(
+    private appwrite: AppwriteService,
+    private router: Router
+  ) {}
 
-  async ngOnInit() {
-    const auth = getAuth();
-    const db = getFirestore();
+  ngOnInit() {
+    this.loadPosts();
+  }
 
-    // Get currently logged-in user
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const userId = user.uid;
+  async loadPosts() {
+    try {
+      // Get the list of posts (you can filter and sort as needed)
+      this.posts = await this.appwrite.getPosts();
+      console.log('Loaded posts:', this.posts);
+    } catch (error) {
+      console.error('Error loading posts:', error);
+    }
+  }
 
-        try {
-          // Reference the user's document
-          const userDocRef = doc(db, 'users', userId);
-          const userDoc = await getDoc(userDocRef);
-
-          if (userDoc.exists()) {
-            this.userData = userDoc.data(); // Save user data to variable
-            console.log('User data:', this.userData);
-          } else {
-            console.error('No user document found!');
-          }
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
-      } else {
-        console.log('No user is logged in.');
-      }
-    });
+  // Navigate to the detailed post page when a post is clicked
+  viewPost(postId: string) {
+    console.log('Post ID',this.posts)
+    this.router.navigate([`/post-detail/${postId}`]);
   }
 }

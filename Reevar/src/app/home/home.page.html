@@ -1,21 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Welcome</ion-title>
+    <ion-title>Homepage</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div *ngIf="userData; else loading">
-    <h2>Hello, {{ userData.email }}</h2>
-    <img
-      [src]="userData.profilePicturePath"
-      alt="Profile Picture"
-      style="width: 150px; height: 150px; border-radius: 50%;"
-    />
-  </div>
-
-  <ng-template #loading>
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Loading user data...</p>
-  </ng-template>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <!-- Loop through posts and display each in a two-column layout -->
+      <ion-col size="6" *ngFor="let post of posts">
+        <ion-card (click)="viewPost(post.$id)">
+          <ion-card-header>
+            <ion-card-title>{{ post.title }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>By {{ post.firstName }} {{ post.lastName }}</p> <!-- Display user's name -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

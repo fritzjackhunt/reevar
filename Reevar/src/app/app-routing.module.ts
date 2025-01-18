@@ -12,16 +12,28 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'delete',
     loadChildren: () => import('./pages/delete/delete.module').then( m => m.DeletePageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'post-detail/:postId',
+    loadChildren: () => import('./pages/post-detail/post-detail.module').then( m => m.PostDetailPageModule)
+  },
+  {
+    path: 'create-post-modal',
+    loadChildren: () => import('./pages/create-post-modal/create-post-modal.module').then( m => m.CreatePostModalPageModule)
   },
 ];
 
