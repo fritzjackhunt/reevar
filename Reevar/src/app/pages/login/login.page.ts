@@ -32,9 +32,17 @@ export class LoginPage {
       console.log('User logged in successfully:', session);
 
       // Navigate to the profile page
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/tabs/home']);
     } catch (error) {
       console.error('Error during login:', error);
+    }
+  }
+
+  async profile () {
+    try {
+      await this.router.navigate(['profile'])
+    } catch (error) {
+      console.log("Error linking to profile", error)
     }
   }
 }

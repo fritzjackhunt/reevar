@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AppwriteService } from '../services/appwrite.service';
 import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [IonicModule, CommonModule], 
 })
 export class HomePage implements OnInit {
   posts: any[] = [];

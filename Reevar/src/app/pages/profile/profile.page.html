@@ -1,27 +1,43 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Profile</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <!-- Image with Icons -->
   <ion-card *ngIf="user">
-    <ion-card-header>
-      <ion-card-title>{{ firstName }} {{ lastName }}</ion-card-title>
-    </ion-card-header>
+    <div class="image-container">
+      <ion-img
+        src="https://docs-demo.ionic.io/assets/madison.jpg"
+        alt="The Wisconsin State Capitol building in Madison, WI at night"
+      ></ion-img>
+
+      <!-- Left Icon -->
+      <ion-icon name="settings" class="icon-left"></ion-icon>
+      
+      <!-- Right Icon -->
+      <ion-icon name="menu" class="icon-right"></ion-icon>
+    </div>
+
+    <!-- Profile Details -->
     <ion-card-content>
-      <ion-avatar *ngIf="profilePicture">
-        <img [src]="profilePicture" alt="Profile Picture" />
-      </ion-avatar>      
+      <div class="profile-img-container">
+        <ion-avatar *ngIf="profilePicture">
+          <img [src]="profilePicture" alt="Profile Picture" />
+        </ion-avatar>
+      </div>
+
+      <ion-card-header>
+        <ion-card-title>{{ firstName }} {{ lastName }}</ion-card-title>
+      </ion-card-header>
+      
       <p>Email: {{ user.email }}</p>
-      <button (click)="logout()">
-        Logout
-      </button>
-      <ion-buttons slot="end">
-        <ion-button (click)="openCreatePostModal()">
-          <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
+      <button (click)="logout()">Logout</button>
+      
     </ion-card-content>
   </ion-card>
+
+  <!-- Create Post Button -->
+  <ion-buttons>
+    <ion-button class="create-post-button" (click)="openCreatePostModal()">
+      <ion-icon size="large" slot="icon-only" class="create-post" name="add"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+
+
 </ion-content>

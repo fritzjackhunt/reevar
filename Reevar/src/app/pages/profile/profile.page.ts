@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AppwriteService } from '../../services/appwrite.service';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { CreatePostModalComponent } from '../create-post-modal/create-post-modal.page';
+import { CommonModule } from '@angular/common';
 
 
 interface UserProfile {
@@ -18,7 +19,8 @@ interface UserProfile {
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [IonicModule, CommonModule], 
 })
 export class ProfilePage implements OnInit {
   user: UserProfile | null = null;

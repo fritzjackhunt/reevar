@@ -35,6 +35,14 @@ const routes: Routes = [
     path: 'create-post-modal',
     loadChildren: () => import('./pages/create-post-modal/create-post-modal.module').then( m => m.CreatePostModalPageModule)
   },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
+  },
+  {
+    path: 'search',
+    loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
+  },
 ];
 
 @NgModule({

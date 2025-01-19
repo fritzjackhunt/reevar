@@ -2,6 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { AppwriteService } from '../../services/appwrite.service';
 import Quill from 'quill';
 import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-post-modal',
@@ -11,22 +12,15 @@ import { ModalController } from '@ionic/angular';
 })
 export class CreatePostModalComponent implements AfterViewInit {
   content: string = ''; // Holds the Quill editor content
+  //Minimum quill toolbar if more needed refer to docs or sample project 
   editorModules = {
     toolbar: [
-      ['bold', 'italic', 'underline', 'strike'],
-      ['blockquote', 'code-block'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ script: 'sub' }, { script: 'super' }],
-      [{ indent: '-1' }, { indent: '+1' }],
-      [{ direction: 'rtl' }],
-      [{ size: ['small', false, 'large', 'huge'] }],
-      [{ color: [] as any }, { background: [] as any }],
-      [{ font: [] as any }],
-      [{ align: [] as any }],
-      ['link', 'image', 'video'],
-      ['clean'],
+      [{header : [1, 2, false] }],
+      ['bold', 'italic', 'underline'],
+      ['image', 'code-block'],
     ],
   };
+  placeholder: 'Compose an epic'
   post: any = {
     title: '',
     content: ''
@@ -35,6 +29,7 @@ export class CreatePostModalComponent implements AfterViewInit {
   constructor(
     private appwrite: AppwriteService,
     private modalCtrl: ModalController,
+    private router: Router
   ) {}
 
   ngAfterViewInit() {
@@ -113,6 +108,7 @@ export class CreatePostModalComponent implements AfterViewInit {
         await this.appwrite.createPost(post.title, post.content);
         console.log('Post saved successfully!');
         this.dismiss(); // Close the modal after saving
+        this.router.navigate(['/tabs/home']); // Navigate to the tabs homepage
       } else {
         console.error('Title or content cannot be empty');
       }

@@ -71,7 +71,7 @@ export class AppwriteService {
 
   // Get the profile picture URL
   getProfilePictureUrl(fileId: string) {
-    return this.storage.getFilePreview('your-bucket-id', fileId); // Replace bucket ID
+    return this.storage.getFilePreview('67878cfa00186fcb4ab7', fileId); // Replace bucket ID
   }
 
   // Method to create a post
